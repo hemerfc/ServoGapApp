@@ -1,0 +1,39 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:openGl="clr-namespace:ServoGapApp.OpenGL"
+        xmlns:servoGapApp="clr-namespace:ServoGapApp"
+        mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="450"
+        x:Class="ServoGapApp.MainWindow"
+        Title="ServoGapApp">
+    <Design.DataContext>
+        <servoGapApp:MainWindowViewModel></servoGapApp:MainWindowViewModel>
+    </Design.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Name="MainMenu">
+            <TextBlock Text="Servo Gap Application" FontSize="24" HorizontalAlignment="Center" Margin="10"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Column="0" Grid.Row="1" Name="ControlPanel" Orientation="Vertical" Margin="10">
+            <TextBlock Text="Control Panel" FontSize="18" Margin="0,0,0,10"/>
+            <Button Content="Start Servo" Width="150" Margin="0,0,0,10"/>
+            <Button Content="Stop Servo" Width="150" Margin="0,0,0,10"/>
+            <Button Content="Reset Servo" Width="150" Margin="0,0,0,10"/>
+            <Button Content="Show/Hide OpenGL" Width="150" Margin="0,0,0,10"/>
+        </StackPanel>
+        
+        <Panel Grid.Column="1" Grid.Row="1" Name="MainPanel" Background="Black"> 
+            <openGl:CubeRenderingTkOpenGlControl Focusable="True" />
+        </Panel>
+    </Grid>
+</Window>
+
