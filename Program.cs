@@ -17,7 +17,7 @@ class Program
     public static AppBuilder BuildAvaloniaApp()
         => AppBuilder.Configure<App>()
             .UsePlatformDetect()
-            .With(new Win32PlatformOptions { RenderingMode = new Collection<Win32RenderingMode> { Win32RenderingMode.Wgl } })
+            .With(new AvaloniaNativePlatformOptions { RenderingMode = new [] { AvaloniaNativeRenderingMode.OpenGl } })
             .WithInterFont()
             .LogToTrace();
 }

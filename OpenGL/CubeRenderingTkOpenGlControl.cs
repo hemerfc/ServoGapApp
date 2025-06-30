@@ -2,6 +2,7 @@ using System;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
 using ServoGapApp.Shaders;
+using ServoGapApp.Simulation;
 
 namespace ServoGapApp.OpenGL
 {
@@ -34,8 +35,11 @@ namespace ServoGapApp.OpenGL
             Console.WriteLine("UI: Creating OpenGLControl");
         }
 
+        public WorldSimulation? Simulation { get; set; }
+
         protected override void OpenTkInit()
         {
+            Simulation = new WorldSimulation(() => { });
             _shader = new("Shaders/shader.vert", "Shaders/shader.frag");
             _shader.Use();
 
@@ -88,7 +92,7 @@ namespace ServoGapApp.OpenGL
             var view = Matrix4.Identity;
             
             var aspectRatio = (float)(Bounds.Width / Bounds.Height);
-            var projection = Matrix4.CreateOrthographic(2000 * aspectRatio, 2000, -1.0f, 1.0f);
+            var projection = Matrix4.CreateOrthographic(11000 * aspectRatio, 11000, -1.0f, 1.0f);
             
             _shader.SetMatrix4("model", model);
             _shader.SetMatrix4("view", view);

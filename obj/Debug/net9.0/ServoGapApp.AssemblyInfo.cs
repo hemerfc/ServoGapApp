@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ServoGapApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+52e31d20638f3ed293fec7a8f691f42d7355881f")]
 [assembly: System.Reflection.AssemblyProductAttribute("ServoGapApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ServoGapApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

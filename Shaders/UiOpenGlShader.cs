@@ -77,6 +77,8 @@ namespace ServoGapApp.Shaders
 
 		public void SetMatrix4(string name, Matrix4 value) => GL.UniformMatrix4(GetUniformLocation(name), true, ref value);
 
+		public void SetVector4(string name, Vector4 value) => GL.Uniform4(GetUniformLocation(name), value);
+
 		~UiOpenGlShader()
 		{
 			GL.DeleteProgram(_handle);
