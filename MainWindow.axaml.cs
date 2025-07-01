@@ -21,6 +21,7 @@ public partial class MainWindow : Window
         InitializeComponent();
         this.ExtendClientAreaToDecorationsHint = true;
         this.ExtendClientAreaTitleBarHeightHint = 30d;
+        this.Activate();
     }
 
     private void InitializeComponent()

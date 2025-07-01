@@ -18,10 +18,10 @@ namespace ServoGapApp.OpenGL
         private readonly float[] _vertices =
         {
             // Position
-            500f, 500f, 0.0f,  // top right
-            500f, -500f, 0.0f, // bottom right
-            -500f, -500f, 0.0f,// bottom left
-            -500f, 500f, 0.0f, // top left
+            500f, 500f, 0.0f, // top right
+            500f,   0f, 0.0f, // bottom right
+              0f,   0f, 0.0f, // bottom left
+              0f, 500f, 0.0f // top left
         };
 
         private readonly uint[] _indices =
@@ -53,8 +53,9 @@ namespace ServoGapApp.OpenGL
             GL.BindBuffer(BufferTarget.ArrayBuffer, _vertexBufferObject);
             GL.BufferData(BufferTarget.ArrayBuffer, _vertices.Length * sizeof(float), _vertices, BufferUsageHint.StaticDraw);
 
-            GL.VertexAttribPointer(_shader.GetAttribLocation("aPosition"), 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
-            GL.EnableVertexAttribArray(_shader.GetAttribLocation("aPosition"));
+            var aPositionLocation = _shader.GetAttribLocation("aPosition");
+            GL.VertexAttribPointer(aPositionLocation, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
+            GL.EnableVertexAttribArray(aPositionLocation);
 
             _elementBufferObject = GL.GenBuffer();
             GL.BindBuffer(BufferTarget.ElementArrayBuffer, _elementBufferObject);
@@ -91,8 +92,11 @@ namespace ServoGapApp.OpenGL
             var model = Matrix4.CreateRotationZ(MathHelper.DegreesToRadians(_modelRotationDegrees));
             var view = Matrix4.Identity;
             
-            var aspectRatio = (float)(Bounds.Width / Bounds.Height);
-            var projection = Matrix4.CreateOrthographic(11000 * aspectRatio, 11000, -1.0f, 1.0f);
+            var aspectRatio = (float)( Bounds.Height / Bounds.Width) / 2f;                                  
+            var limit = 11000f;
+            var limitLeft = - (limit * aspectRatio);
+            var limitRight = limit * aspectRatio;
+            var projection = Matrix4.CreateOrthographicOffCenter(0, limit, limitLeft, limitRight, -1.0f, 1.0f);
             
             _shader.SetMatrix4("model", model);
             _shader.SetMatrix4("view", view);
@@ -100,6 +104,8 @@ namespace ServoGapApp.OpenGL
 
             GL.BindVertexArray(_vertexArrayObject);
             GL.DrawElements(PrimitiveType.Triangles, _indices.Length, DrawElementsType.UnsignedInt, 0);
+
+            Simulation.Render(projection, view);
         }
     }
 }

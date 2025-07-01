@@ -107,7 +107,7 @@ namespace ServoGapApp.Simulation
             }
         }
 
-        public new void Render(Matrix4 projection)
+        public new void Render(Matrix4 projection, Matrix4 view)
         {
             var color = new Vector4(0.6f, 0.6f, 0.6f, 1.0f);
             if (CorrectionSpeed < 0)
@@ -115,7 +115,7 @@ namespace ServoGapApp.Simulation
             else if (CorrectionSpeed > 0)
                 color = new Vector4(0.0f, 0.6f, 0.6f, 1.0f);
             
-            base.Render(projection, color);
+            base.Render(projection, view, color);
         }
     }
 }

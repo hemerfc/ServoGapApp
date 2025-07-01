@@ -83,7 +83,7 @@ namespace ServoGapApp.Simulation
             GL.EnableVertexAttribArray(aPositionLocation);
         }
 
-        public virtual void Render(Matrix4 projection)
+        public virtual void Render(Matrix4 projection, Matrix4 view)
         {
             _shader.Use();
 
@@ -96,7 +96,6 @@ namespace ServoGapApp.Simulation
             _shader.SetVector4("color", color);
 
             var model = Matrix4.CreateTranslation((float)PosX, (float)PosY, 0.0f);
-            var view = Matrix4.LookAt(new Vector3(0, 0, 1), Vector3.Zero, Vector3.UnitY);
 
             _shader.SetMatrix4("model", model);
             _shader.SetMatrix4("view", view);

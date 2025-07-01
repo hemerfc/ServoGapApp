@@ -19,6 +19,7 @@ namespace ServoGapApp.Textures
 
         public void LoadFromFile(string path)
         {
+            Use();
             var image = Image.Load<Rgba32>(path);
 
             //ImageSharp counts (0, 0) as top-left, OpenGL wants it to be bottom-left. fix.
@@ -46,6 +47,10 @@ namespace ServoGapApp.Textures
             
             
             GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, image.Width, image.Height, 0, PixelFormat.Rgba, PixelType.UnsignedByte, pixels.ToArray());
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.Repeat);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.Repeat);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.LinearMipmapLinear);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Linear);
             GL.GenerateMipmap(GenerateMipmapTarget.Texture2D);
         }
 
