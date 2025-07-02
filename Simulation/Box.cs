@@ -64,53 +64,10 @@ namespace ServoGapApp.Simulation
 
         public void Init()
         {
-            _shader = new UiOpenGlShader("Shaders/box.vert", "Shaders/box.frag");
-            _shader.Use();
-
-            _vertexArrayObject = GL.GenVertexArray();
-            GL.BindVertexArray(_vertexArrayObject);
-
-            _vertexBufferObject = GL.GenBuffer();
-            GL.BindBuffer(BufferTarget.ArrayBuffer, _vertexBufferObject);
-            GL.BufferData(BufferTarget.ArrayBuffer, _vertices.Length * sizeof(float), _vertices, BufferUsageHint.DynamicDraw);
-
-            _elementBufferObject = GL.GenBuffer();
-            GL.BindBuffer(BufferTarget.ElementArrayBuffer, _elementBufferObject);
-            GL.BufferData(BufferTarget.ElementArrayBuffer, _indices.Length * sizeof(uint), _indices, BufferUsageHint.StaticDraw);
-
-            var aPositionLocation = _shader.GetAttribLocation("aPosition");
-            GL.VertexAttribPointer(aPositionLocation, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
-            GL.EnableVertexAttribArray(aPositionLocation);
-        }
-
-        public virtual void Render(Matrix4 projection, Matrix4 view)
-        {
-            _shader.Use();
-
-            var color = new Vector4(0.0f, 1.0f, 0.0f, 1.0f);
-            if (Collision)
-                color = new Vector4(1.0f, 0.0f, 0.0f, 1.0f);
-            else if (FutureCollision)
-                color = new Vector4(1.0f, 1.0f, 0.0f, 1.0f);
-            
-            _shader.SetVector4("color", color);
-
-            var model = Matrix4.CreateTranslation((float)PosX, (float)PosY, 0.0f);
-
-            _shader.SetMatrix4("model", model);
-            _shader.SetMatrix4("view", view);
-            _shader.SetMatrix4("projection", projection);
-
-            GL.BindVertexArray(_vertexArrayObject);
-            GL.DrawElements(PrimitiveType.Triangles, _indices.Length, DrawElementsType.UnsignedInt, 0);
         }
 
         public void Dispose()
         {
-            GL.DeleteBuffer(_vertexBufferObject);
-            GL.DeleteBuffer(_elementBufferObject);
-            GL.DeleteVertexArray(_vertexArrayObject);
-            _shader?.Dispose();
         }
     }
 }

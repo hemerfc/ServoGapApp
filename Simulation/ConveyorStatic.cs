@@ -51,11 +51,6 @@ namespace ServoGapApp.Simulation
             }
         }
 
-        public virtual void Render(Matrix4 projection, Matrix4 view)
-        {
-            base.Render(projection, view, new Vector4(0.6f, 0.6f, 0.6f, 1.0f));
-        }
-
         public virtual void AfterUpdate()
         {
             var boxToRemove = new List<Box>();

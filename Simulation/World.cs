@@ -36,23 +36,5 @@ namespace ServoGapApp.Simulation
         {
             return (px > posX) && (px < posX + width) && (py > posY) && py < (posY + height);
         }
-        
-        public void Render(Matrix4 projection, Matrix4 view)
-        {
-            foreach (var conv in Conveyors)
-            {
-                if (conv is ConveyorServo servo)
-                    servo.Render(projection, view);
-                else if (conv is ConveyorStatic staticConv)
-                    staticConv.Render(projection, view);
-                else
-                    conv.Render(projection, view, new Vector4(0.6f, 0.6f, 0.6f, 1.0f));
-            }
-
-            foreach (var box in Boxes)
-            {
-                box.Render(projection, view);
-            }
-        }
     }
 }
